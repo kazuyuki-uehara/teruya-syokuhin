@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+
+  // provider = "sqlite"
+  // url      = "file:./dev.db"
+}
+
+// testing
+model schoolLunchData {
+  id             String   @id @default(cuid())
+  tokuisakiCd    String
+  tokuisakiName  String
+  jyuchuYmd      DateTime
+  nouhinYmd      DateTime
+  syohinCd       String   @unique
+  syohinName     String
+  teikeisaki     String
+  suryo          Float
+  kamawari       Int
+  cut            String
+  kansanA        Int
+  kansanB        Int
+  nouhinsuryo    Float
+  cyumonsaZentai Float
+  cyumonsa1Kama  Float
+  bikou1         String
+  bikou2         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}
+
+// masterSchoolLunchDataCalculation
+model masterSchoolLunchDataCalculation {
+  id              String    @id @default(cuid())
+  syohinCd        String    @unique
+  tani            String
+  keisanSettei    Int
+  fukuroKijyunchi Float
+  created_at      DateTime  @default(now())
+  updated_at      DateTime?
+}
+
+model schoolLunchDataReal {
+  id             String    @id @default(cuid())
+  tokuisakiCd    String    
+  tokuisakiName  String
+  jyuchuYmd      DateTime
+  nouhinYmd      DateTime
+  syohinCd       String
+  syohinName     String
+  teikeisaki     String
+  suryo          Float
+  kamawari       Int
+  cut            String
+  kansanA        Int
+  kansanB        Int
+  nouhinsuryo    Float
+  cyumonsaZentai Float
+  cyumonsa1Kama  Float
+  bikou1         String
+  bikou2         String
+  created_at     DateTime  @default(now())
+  updated_at     DateTime?
+}
+
+model masterSchoolLunchBiko2 {
+  id              String    @id @default(cuid())
+  bikoCd          Int       @default(autoincrement()) @unique
+  tokuisakiCd     String
+  syohinCd        String
+  mongon          String
+  created_at      DateTime  @default(now())
+  updated_at      DateTime?
+}
